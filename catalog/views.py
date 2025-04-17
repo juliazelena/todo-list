@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -42,3 +42,25 @@ class TagDeleteView(generic.DeleteView):
     model = Tag
     success_url = reverse_lazy("catalog:tag-list")
     template_name = "catalog/tag_confirm_delete.html"
+
+
+class PostCreateView(generic.CreateView):
+    model = Post
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:index")
+    template_name = "catalog/post_form.html"
+
+
+# def toggle_task_status(request: HttpRequest, pk: int) -> HttpRequest:
+#     task = get_object_or_404(Post, pk=pk)
+#     task.is_done = not task.is_done
+#     task.save()
+#     return redirect("catalog:index")
+#
+#
+# class PostUpdateView(generic.UpdateView):
+#     model = Post
+#     fields = "__all__"
+#     success_url = reverse_lazy("catalog:index")
+#     template_name = "catalog/post_form.html"
+
