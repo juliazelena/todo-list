@@ -13,7 +13,7 @@ def index(request: HttpRequest) -> HttpResponse:
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
-        "post_list": post_list,
+        "paginator": paginator,
         "page_obj": page_obj,
     }
     return render(request, "catalog/index.html", context=context)
@@ -63,4 +63,11 @@ class PostUpdateView(generic.UpdateView):
     fields = "__all__"
     success_url = reverse_lazy("catalog:index")
     template_name = "catalog/post_form.html"
+
+
+class PostDeleteView(generic.DeleteView):
+    model = Post
+    success_url = reverse_lazy("catalog:index")
+    template_name = "catalog/post_confirm_delete.html"
+
 
