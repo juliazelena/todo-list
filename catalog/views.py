@@ -51,16 +51,16 @@ class PostCreateView(generic.CreateView):
     template_name = "catalog/post_form.html"
 
 
-def toggle_task_status(request: HttpRequest, pk: int) -> HttpRequest:
-    task = get_object_or_404(Post, pk=pk)
-    task.is_done = not task.is_done
-    task.save()
+def toggle_post_status(request: HttpRequest, pk: int) -> HttpRequest:
+    post = get_object_or_404(Post, pk=pk)
+    post.is_done = not post.is_done
+    post.save()
     return redirect("catalog:index")
-#
-#
-# class PostUpdateView(generic.UpdateView):
-#     model = Post
-#     fields = "__all__"
-#     success_url = reverse_lazy("catalog:index")
-#     template_name = "catalog/post_form.html"
+
+
+class PostUpdateView(generic.UpdateView):
+    model = Post
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:index")
+    template_name = "catalog/post_form.html"
 
