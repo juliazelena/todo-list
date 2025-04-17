@@ -26,7 +26,6 @@
                 </form>
             </h4>
 
-
             <p class="text-muted mb-1">Created: {{ post.created_time }}</p>
 
             {% if post.tag.all %}
@@ -45,6 +44,7 @@
                     <strong>Deadline:</strong> {{ post.deadline|date:"Y-m-d H:i" }}
                 </p>
             {% endif %}
+            <a href="{% url 'catalog:post-update' pk=post.id%}">Update</a>
         </div>
     </div>
 {% endfor %}
