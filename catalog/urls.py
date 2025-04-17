@@ -9,6 +9,7 @@ from catalog.views import (
     PostCreateView,
     toggle_post_status,
     PostUpdateView,
+    PostDeleteView,
 )
 
 urlpatterns = [
@@ -20,7 +21,8 @@ urlpatterns = [
     path("/create/", PostCreateView.as_view(), name="post-create"),
     path('post/<int:pk>/toggle/', toggle_post_status,
          name='toggle-task-status'),
-    path("/<int:pk>/update/", PostUpdateView.as_view(), name="post-update")
+    path("/<int:pk>/update/", PostUpdateView.as_view(), name="post-update"),
+    path("/<int:pk>/delete/", PostDeleteView.as_view(), name="post-delete"),
 ]
 
 app_name = "catalog"
