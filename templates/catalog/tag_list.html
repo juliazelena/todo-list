@@ -2,8 +2,7 @@
 
 {% block content %}
   <h1>Tag List
-    <a style="float: Right" href="#">+
-    </a>
+    <a class="btn btn-primary" href="{% url 'catalog:tag-create' %}">Add</a>
   </h1>
   {% if tag_list %}
     <table class="table">
