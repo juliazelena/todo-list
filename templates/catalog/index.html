@@ -1,71 +1,66 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-5 px-4 py-3">
-    <h1 class="mb-0">Todo List</h1>
-    <a class="btn btn-primary" href="{% url 'catalog:post-create' %}" role="button">Create New</a>
+<div class="d-flex justify-content-between align-items-center mb-4 px-4 py-3 border-bottom">
+    <h1 class="mb-0">📝 Todo List</h1>
+    <a class="btn btn-primary" href="{% url 'catalog:post-create' %}">
+        ➕ Create New
+    </a>
 </div>
 
 {% for post in page_obj %}
-    <div class="card mb-4 shadow-sm px-3 py-2">
-        <div class="card-body">
-            <h4 class="card-title d-flex justify-content-between align-items-center">
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <h4 class="title mb-0">
                 {{ post.content }}
                 {% if post.is_done %}
-                    <span class="badge bg-success">Done</span>
+                <p style="color: green;">Done</p>
                 {% else %}
-                    <span class="badge bg-danger">Not Done</span>
+                <p style="color: red;">Not done</p>
                 {% endif %}
-                <form action="{% url 'catalog:toggle-task-status' post.pk %}" method="post" style="display:inline;">
+            </h4>
+            <div class="btn-group">
+                <form action="{% url 'catalog:toggle-task-status' post.pk %}" method="post">
                     {% csrf_token %}
                     {% if post.is_done %}
-                    <button type="submit" class="btn btn-warning btn-sm">Undo</button>
+                    <button type="submit" class="btn btn-outline-warning btn-sm">
+                        🔁 Undo
+                    </button>
                     {% else %}
-                    <button type="submit" class="btn btn-success btn-sm">Complete</button>
+                    <button type="submit" class="btn btn-outline-success btn-sm">
+                        ✅ Complete
+                    </button>
                     {% endif %}
                 </form>
-            </h4>
-
-            <p class="text-muted mb-1">Created: {{ post.created_time }}</p>
-
-            {% if post.tag.all %}
-                <p class="mb-1">
-                    <strong>Tags:</strong>
-                    {% for tag in post.tag.all %}
-                        <span class="badge bg-info">{{ tag.name }}</span>
-                    {% endfor %}
-                </p>
-            {% else %}
-                <p class="text-muted">No tags</p>
-            {% endif %}
-
-            {% if post.deadline %}
-                <p style="color: orange;" class="mb-0">
-                    <strong>Deadline:</strong> {{ post.deadline|date:"Y-m-d H:i" }}
-                </p>
-            {% endif %}
-            <a href="{% url 'catalog:post-update' pk=post.id%}">Update</a>
+                <a href="{% url 'catalog:post-update' post.id %}" class="btn btn-outline-info btn-sm">
+                    ✏️ Update
+                </a>
+                <a href="{% url 'catalog:post-delete' post.id %}" class="btn btn-outline-danger btn-sm">
+                    🗑️ Delete
+                </a>
+            </div>
         </div>
-    </div>
-{% endfor %}
-{% endblock %}
 
-{% block pagination %}
-<div class="d-flex justify-content-center mt-4">
-    <ul class="pagination">
-        {% if page_obj.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Prev</a>
-        </li>
+        <p class="text-muted mb-1">📅 Created: {{ post.created_time }}</p>
+
+        {% if post.tag.all %}
+        <p class="mb-1">
+            <strong>🏷️ Tags:</strong>
+            {% for tag in post.tag.all %}
+            <span class="badge bg-info text-dark">{{ tag.name }}</span>
+            {% endfor %}
+        </p>
+        {% else %}
+        <p class="text-muted">No tags</p>
         {% endif %}
-        <li class="page-item active">
-            <span class="page-link">{{ page_obj.number }} of {{ paginator.num_pages }}</span>
-        </li>
-        {% if page_obj.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-        </li>
+
+        {% if post.deadline %}
+        <p class="mb-0 text-warning">
+            ⏰ <strong>Deadline:</strong> {{ post.deadline|date:"Y-m-d H:i" }}
+        </p>
         {% endif %}
-    </ul>
+    </div>
 </div>
+{% endfor %}
 {% endblock %}
