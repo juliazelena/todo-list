@@ -1,5 +1,4 @@
 from django.db import models
-from django.urls import reverse
 
 
 class Post(models.Model):
@@ -8,6 +7,9 @@ class Post(models.Model):
     deadline = models.DateTimeField(null=True, blank=True)
     is_done = models.BooleanField(default=False)
     tag = models.ManyToManyField("Tag", related_name="posts")
+
+    class Meta:
+        ordering = ["-created_time", "is_done"]
 
     def __str__(self):
         return self.content
