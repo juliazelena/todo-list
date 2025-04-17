@@ -16,14 +16,14 @@
                 {% else %}
                     <span class="badge bg-danger">Not Done</span>
                 {% endif %}
-<!--                <form action="{% url 'catalog:toggle-task-status' post.pk %}" method="post" style="display:inline;">-->
-<!--                    {% csrf_token %}-->
-<!--                    {% if post.is_done %}-->
-<!--                    <button type="submit" class="btn btn-warning btn-sm">Undo</button>-->
-<!--                    {% else %}-->
-<!--                    <button type="submit" class="btn btn-success btn-sm">Complete</button>-->
-<!--                    {% endif %}-->
-<!--                </form>-->
+                <form action="{% url 'catalog:toggle-task-status' post.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    {% if post.is_done %}
+                    <button type="submit" class="btn btn-warning btn-sm">Undo</button>
+                    {% else %}
+                    <button type="submit" class="btn btn-success btn-sm">Complete</button>
+                    {% endif %}
+                </form>
             </h4>
 
 
