@@ -24,7 +24,7 @@
           <a href="{% url 'catalog:tag-update' pk=tag.id%}">Update</a>
         </td>
         <td>
-          <a href="#" style="color: red">Delete</a>
+          <a href="{% url 'catalog:tag-delete' pk=tag.id%}" style="color: red">Delete</a>
         </td>
       </tr>
       {% endfor %}
