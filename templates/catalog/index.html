@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for post in page_obj %}
+        <div class="ml-3">
+            <h3>
+                <hr>
+                {{ post.content }}
+                {% if post.is_done %}
+                    <span style="color: green; font-size: 16px;">(Done)</span>
+                {% else %}
+                    <span style="color: red; font-size: 16px;">(Not done)</span>
+                {% endif %}
+            </h3>
+
+            <p>Created: {{ post.created_time }}</p>
+
+            {% if post.tag.all %}
+                <p>
+                    Tags:
+                    {% for tag in post.tag.all %}
+                    {{ tag.name }}
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </p>
+            {% else %}
+                <p>No tags</p>
+            {% endif %}
+
+            {% if post.deadline %}
+                <p style="color: orange;">Deadline: {{ post.deadline|date:"Y-m-d H:i" }}</p>
+            {% endif %}
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+{% block pagination %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.previous_page_number }}">Prev
+        </a>
+    </li>
+    {% endif %}
+    <li class="page-item active">
+        <span class="page-link">{{ page_obj.number }} of {{ paginator.num_pages }}</span>
+    </li>
+    {% if page_obj.has_next %}
+    <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.next_page_number }}">Next
+        </a>
+    </li>
+    {% endif %}
+</ul>
+{% endblock %}
