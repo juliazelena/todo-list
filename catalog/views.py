@@ -36,3 +36,9 @@ class TagUpdateView(generic.UpdateView):
     fields = "__all__"
     success_url = reverse_lazy("catalog:tag-list")
     template_name = "catalog/tag_form.html"
+    
+    
+class TagDeleteView(generic.DeleteView):
+    model = Tag
+    success_url = reverse_lazy("catalog:tag-list")
+    template_name = "catalog/tag_confirm_delete.html"
