@@ -29,3 +29,10 @@ class TagCreateView(generic.CreateView):
     fields = "__all__"
     success_url = reverse_lazy("catalog:tag-list")
     template_name = "catalog/tag_form.html"
+    
+
+class TagUpdateView(generic.UpdateView):
+    model = Tag
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:tag-list")
+    template_name = "catalog/tag_form.html"
