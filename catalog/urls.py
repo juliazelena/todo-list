@@ -7,7 +7,7 @@ from catalog.views import (
     TagUpdateView,
     TagDeleteView,
     PostCreateView,
-    # toggle_task_status,
+    toggle_task_status,
     # PostUpdateView,
 )
 
@@ -18,8 +18,8 @@ urlpatterns = [
     path("tags/<int:pk>/update/", TagUpdateView.as_view(), name="tag-update"),
     path("tags/<int:pk>/delete/", TagDeleteView.as_view(), name="tag-delete"),
     path("/create/", PostCreateView.as_view(), name="post-create"),
-    # path('post/<int:pk>/toggle/', toggle_task_status,
-    #      name='toggle-task-status'),
+    path('post/<int:pk>/toggle/', toggle_task_status,
+         name='toggle-task-status'),
     # path("/<int:pk>/update/", PostUpdateView.as_view(), name="post-update")
 ]
 
