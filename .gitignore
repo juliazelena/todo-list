@@ -1,3 +1,4 @@
+.DS_Store
 .venv
 .env
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,pycharm+all

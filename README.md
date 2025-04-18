@@ -52,4 +52,4 @@ python manage.py runserver
 6. Open your browser and navigate to http://127.0.0.1:8000
 
 ## Screenshots
-![img_1.png](media/img.png)
+![sdfgsafg](media/home.png)
